@@ -86,17 +86,26 @@ function parseGuess(guess) {
   return null;
 }
 
-controller.processGuess("A0");
+function handleFireButton() {
+  var guessInput = document.getElementById("guessInput");
+  var guess = guessInput.value;
+  controller.processGuess(guess);
+  guessInput.value = "";
+}
 
-controller.processGuess("A6");
-controller.processGuess("B6");
-controller.processGuess("C6");
+window.onload = init;
 
-controller.processGuess("C4");
-controller.processGuess("D4");
-controller.processGuess("E4");
+function init() {
+  var fireButton = document.getElementById("fireButton");
+  fireButton.onclick = handleFireButton;
+  var guessInput = document.getElementById("guessInput");
+  guessInput.onkeydown = handleKeyPress;
+}
 
-controller.processGuess("B0");
-controller.processGuess("B1");
-controller.processGuess("B2");
-console.log(shipsSunk);
+function handleKeyPress(e) {
+  var fireButton = document.getElementById("fireButton");
+  if (e.keyCode === 13) {
+    fireButton.click();
+    return false;
+  }
+}
